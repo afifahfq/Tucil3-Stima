@@ -10,6 +10,10 @@ def readfile(namafile):
 
 def ceksimpul():
     global simpul;
+    '''
+    print(simpul)
+    output : ['jawa', 'sumatra', 'bali', 'papua', 'sulawesi', 'mamuju', 'ternate', 'kalimantan']
+    '''
     simpul = []
     huruf = ''
     isiSimpul = ''
@@ -25,6 +29,10 @@ def ceksimpul():
 
 def isimatriks():
     global hasil;
+    '''
+    print(hasil) -> matriks
+    output : [['-1', '2', '-1', '-1', '-1', '1', '-1', '-1'], ['2', '-1', '2', '2', '4', '-1', '-1', '-1'], ['-1', '2', '-1', '-1', '3', '-1', '-1', '1'], ['-1', '2', '-1', '-1', '4', '3', '-1', '-1'], ['-1', '4', '3', '4', '-1', '-1', '7', '-1'], ['1', '-1', '-1', '3', '-1', '-1', '5', '-1'], ['-1', '-1', '-1', '-1', '7', '5', '-1', '6'], ['-1', '-1', '1', '-1', '-1', '-1', '6', '-1']]
+    '''
     b = ''
     isi = []
     hasil = []
@@ -45,6 +53,11 @@ def isimatriks():
 
 def grafindict():
     global grafberbobot
+    '''
+    print(grafberbobot)
+    output : {'jawa': ['-1', '2', '-1', '-1', '-1', '1', '-1', '-1'], 'sumatra': ['2', '-1', '2', '2', '4', '-1', '-1', '-1'], 'bali': ['-1', '2', '-1', '-1', '3', '-1', '-1', '1'], 'papua': 
+['-1', '2', '-1', '-1', '4', '3', '-1', '-1'], 'sulawesi': ['-1', '4', '3', '4', '-1', '-1', '7', '-1'], 'mamuju': ['1', '-1', '-1', '3', '-1', '-1', '5', '-1'], 'ternate': ['-1', '-1', '-1', '-1', '7', '5', '-1', '6'], 'kalimantan': ['-1', '-1', '1', '-1', '-1', '-1', '6', '-1']}
+    '''
     grafberbobot = []
     akhir = []
     for i in range(banyaksimpul):
@@ -55,6 +68,10 @@ def grafindict():
 
 def grafberbobotberpasangan():
     global g;
+    '''
+    print(g)
+    Output : [('jawa', 'sumatra', 2), ('jawa', 'mamuju', 1), ('sumatra', 'bali', 2), ('sumatra', 'papua', 2), ('sumatra', 'sulawesi', 4), ('bali', 'sulawesi', 3), ('bali', 'kalimantan', 1), ('papua', 'sulawesi', 4), ('papua', 'mamuju', 3), ('sulawesi', 'ternate', 7), ('mamuju', 'ternate', 5), ('ternate', 'kalimantan', 6)]
+    '''
     g = []
     for i in range(banyaksimpul):
         for j in range(0+i, banyaksimpul):
@@ -81,4 +98,7 @@ grafindict()
 
 grafberbobotberpasangan()
 #print(g)
+
+#simpulasal = input("Masukkan simpul asal : ")
+#simpultujuan = input("Masukkan simpul tujuan : ")
 
