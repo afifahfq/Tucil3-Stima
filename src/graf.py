@@ -52,7 +52,7 @@ def isimatriks():
     bobotpersimpul = []
     for i in range(banyaksimpul):
         currhasil = graf[i].split(',')
-        currhasil = currhasil[:-1]
+        currhasil[-1] = currhasil[-1].strip('\n')
         hasil.append(currhasil)
     
 def grafindict():
@@ -72,7 +72,7 @@ def grafberbobotberpasangan():
         for j in range(0+i, banyaksimpul):
             if (hasil[i][j] != '-1' and hasil[j][i] != '-1'):
                 if (hasil[i][j] == hasil[j][i]):
-                    g += [(simpul[i], simpul[j], int(hasil[i][j]))]
+                    g += [(simpul[i], simpul[j], float(hasil[i][j]))]
                 else:
                     continue
             else:
@@ -102,7 +102,7 @@ def jarak(simpultujuan):
             break
 
     for i in range(banyaksimpul):
-        dist = haversine(int(hasilposisi[i][0]), int(hasilposisi[i][1]), int(hasilposisi[posisitujuan][0]), int(hasilposisi[posisitujuan][1]))
+        dist = haversine(float(hasilposisi[i][0]), float(hasilposisi[i][1]), float(hasilposisi[posisitujuan][0]), float(hasilposisi[posisitujuan][1]))
         akhir += [(simpul[i], dist)]
         
     heuristic = dict(akhir) 
