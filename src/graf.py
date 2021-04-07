@@ -3,7 +3,6 @@ from math import radians, cos, sin, asin, sqrt
 
 def readfile(namafilegraf):
     global graf, grafsimpul, banyaksimpul, bobot
-    #file = open("./test/"+ namafile + ".txt", "r")
     file = open("../test/"+ namafilegraf + ".txt", "r")
     banyaksimpul = int(file.readline())
     #print("Banyak Simpul : ", banyaksimpul)
@@ -12,9 +11,9 @@ def readfile(namafilegraf):
     #print("grafsimpul:", grafsimpul)
     #print("graf:", graf)
 
-def read():
+def readposisi(namafileposisi):
     global posisi, hasilposisi
-    file = open("../test/inputPosisi.txt", "r")
+    file = open("../test/" + namafileposisi + ".txt", "r")
     posisi = file.readlines()
 
     b = ''
@@ -216,6 +215,8 @@ def astar_search(graph, heuristics, start, end):
 namafilegraf = input("Masukkan file graf : " )
 readfile(namafilegraf)
 
+namafileposisi = input("Masukkan file posisi : " )
+
 ceksimpul()
 #print("simpul:", simpul)
 
@@ -223,13 +224,13 @@ isimatriks()
 #print("hasil:",hasil)
 
 grafindict()
-print("grafberbobot:", grafberbobot)
+#print("grafberbobot:", grafberbobot)
 
 grafberbobotberpasangan()
-print("g:",g)
+#print("g:",g)
 
-read()
-print("hasilposisi:", hasilposisi)
+readposisi(namafileposisi)
+#print("hasilposisi:", hasilposisi)
 
 simpulasal = input("Masukkan simpul asal : ")
 simpultujuan = input("Masukkan simpul tujuan : ")
@@ -241,5 +242,5 @@ for edge in g :
     graf.connect(edge[0], edge[1], edge[2])
 
 path = astar_search(graf, heuristic, simpulasal, simpultujuan)
-print("solution:", path)
+print("solusi:", path)
 print()
