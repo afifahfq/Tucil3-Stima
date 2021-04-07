@@ -1,24 +1,20 @@
 import math
 from math import radians, cos, sin, asin, sqrt
 
-def readfile(namafile):
-    global graf, grafsimpul, banyaksimpul, bobot;
+def readfile(namafilegraf):
+    global graf, grafsimpul, banyaksimpul, bobot
     #file = open("./test/"+ namafile + ".txt", "r")
-    file = open("./test/inputGraf.txt", "r")
-    banyaksimpul = int(file.readline());
-    #print("Banyak Simpul : ", banyaksimpul)
+    file = open("../test/"+ namafilegraf + ".txt", "r")
+    banyaksimpul = int(file.readline())
+    print("Banyak Simpul : ", banyaksimpul)
     grafsimpul = file.readline()
     graf = file.readlines()
-    #print(grafsimpul);
-    #print(graf)
+    print("grafsimpul:", grafsimpul)
+    print("graf:", graf)
 
 def read():
-    global posisi, hasilposisi;
-    '''
-    print(hasilposisi)
-    output : [['5', '3'], ['14', '7'], ['10', '3'], ['5', '12'], ['0', '3'], ['1', '9'], ['7', '1'], ['17', '10']]
-    '''
-    file = open("./test/inputPosisi.txt", "r")
+    global posisi, hasilposisi
+    file = open("../test/inputPosisi.txt", "r")
     posisi = file.readlines()
 
     b = ''
@@ -38,32 +34,28 @@ def read():
                 b += posisi[i][j]
                 isi = [b]
                 #print("ISI : ", isi)
+    print("posisi:", posisi)
+    print("hasilposisi:", hasilposisi)
 
 def ceksimpul():
-    global simpul;
-    '''
-    print(simpul)
-    output : ['jawa', 'sumatra', 'bali', 'papua', 'sulawesi', 'mamuju', 'ternate', 'kalimantan']
-    '''
+    global simpul
     simpul = []
     huruf = ''
     isiSimpul = ''
-    for i in range(len(grafsimpul)):
-        for j in range(len(grafsimpul[i])):
-            if (grafsimpul[i][j] == ','):
-                simpul += [huruf]
-                huruf = ''
-            elif (grafsimpul[i][j] == '\n'):
-                simpul += [huruf]
-            elif (grafsimpul[i][j] != ','):
-                huruf += grafsimpul[i][j]
+    simpul = grafsimpul.split(',')
+    lastnode = simpul[-1][:-1]
+    simpul = simpul[:-1]
+    simpul.append(lastnode)
+    print("simpul:", simpul)
+    #splitsimpul()
+
+def splitsimpul():
+    newsimpul = [char for char in simpul[0]]
+    simpul.clear()
+    simpul.extend(newsimpul)
 
 def isimatriks():
-    global hasil;
-    '''
-    print(hasil) -> matriks
-    output : [['-1', '2', '-1', '-1', '-1', '1', '-1', '-1'], ['2', '-1', '2', '2', '4', '-1', '-1', '-1'], ['-1', '2', '-1', '-1', '3', '-1', '-1', '1'], ['-1', '2', '-1', '-1', '4', '3', '-1', '-1'], ['-1', '4', '3', '4', '-1', '-1', '7', '-1'], ['1', '-1', '-1', '3', '-1', '-1', '5', '-1'], ['-1', '-1', '-1', '-1', '7', '5', '-1', '6'], ['-1', '-1', '1', '-1', '-1', '-1', '6', '-1']]
-    '''
+    global hasil
     b = ''
     isi = []
     hasil = []
@@ -84,11 +76,6 @@ def isimatriks():
 
 def grafindict():
     global grafberbobot
-    '''
-    print(grafberbobot)
-    output : {'jawa': ['-1', '2', '-1', '-1', '-1', '1', '-1', '-1'], 'sumatra': ['2', '-1', '2', '2', '4', '-1', '-1', '-1'], 'bali': ['-1', '2', '-1', '-1', '3', '-1', '-1', '1'], 'papua': 
-['-1', '2', '-1', '-1', '4', '3', '-1', '-1'], 'sulawesi': ['-1', '4', '3', '4', '-1', '-1', '7', '-1'], 'mamuju': ['1', '-1', '-1', '3', '-1', '-1', '5', '-1'], 'ternate': ['-1', '-1', '-1', '-1', '7', '5', '-1', '6'], 'kalimantan': ['-1', '-1', '1', '-1', '-1', '-1', '6', '-1']}
-    '''
     grafberbobot = []
     akhir = []
     for i in range(banyaksimpul):
@@ -98,11 +85,7 @@ def grafindict():
     grafberbobot = dict(akhir)
 
 def grafberbobotberpasangan():
-    global g;
-    '''
-    print(g)
-    Output : [('jawa', 'sumatra', 2), ('jawa', 'mamuju', 1), ('sumatra', 'bali', 2), ('sumatra', 'papua', 2), ('sumatra', 'sulawesi', 4), ('bali', 'sulawesi', 3), ('bali', 'kalimantan', 1), ('papua', 'sulawesi', 4), ('papua', 'mamuju', 3), ('sulawesi', 'ternate', 7), ('mamuju', 'ternate', 5), ('ternate', 'kalimantan', 6)]
-    '''
+    global g
     g = []
     for i in range(banyaksimpul):
         for j in range(0+i, banyaksimpul):
@@ -110,9 +93,9 @@ def grafberbobotberpasangan():
                 if (hasil[i][j] == hasil[j][i]):
                     g += [(simpul[i], simpul[j], int(hasil[i][j]))]
                 else:
-                    continue;
+                    continue
             else:
-                continue;
+                continue
 
 def haversine(lat1, lon1, lattujuan, lontujuan):
     R = 6372.8 * 1000
@@ -127,20 +110,15 @@ def haversine(lat1, lon1, lattujuan, lontujuan):
     return R * c
 
 def jarak(simpultujuan):
-    global heuristic, posisitujuan;
-    '''
-    print(heuristic)
-    output : {'jawa': 556131.7128554732, 'sumatra': 622281.6451387275, 'bali': 0.0, 'papua': 1137362.163370625, 'sulawesi': 1112263.4257109463, 'mamuju': 1201005.3323019776, 'ternate': 399667.1726683548, 'kalimantan': 1085576.3721392686}
-    '''
+    global heuristic, posisitujuan
     heuristic = [] #heuristic hitung ke node goal
     akhir = []
 
     posisitujuan = 0
     for i in range(banyaksimpul):
         if (simpultujuan == simpul[i]):
-            print("true")
             posisitujuan = i
-            break;
+            break
 
     for i in range(banyaksimpul):
         dist = haversine(int(hasilposisi[i][0]), int(hasilposisi[i][1]), int(hasilposisi[posisitujuan][0]), int(hasilposisi[posisitujuan][1]))
@@ -148,31 +126,120 @@ def jarak(simpultujuan):
         
     heuristic = dict(akhir) 
 
+class Graph:
+    def __init__(self, graph_dict=None, directed=True):
+        self.graph_dict = graph_dict or {}
+        self.directed = directed
+        if not directed:
+            self.make_undirected()
+    def make_undirected(self):
+        for a in list(self.graph_dict.keys()):
+            for (b, dist) in self.graph_dict[a].items():
+                self.graph_dict.setdefault(b, {})[a] = dist
+    def connect(self, A, B, distance=1):
+        self.graph_dict.setdefault(A, {})[B] = distance
+        if not self.directed:
+            self.graph_dict.setdefault(B, {})[A] = distance
+    def get(self, a, b=None):
+        links = self.graph_dict.setdefault(a, {})
+        if b is None:
+            return links
+        else:
+            return links.get(b)
+    def nodes(self):
+        s1 = set([k for k in self.graph_dict.keys()])
+        s2 = set([k2 for v in self.graph_dict.values() for k2, v2 in v.items()])
+        nodes = s1.union(s2)
+        return list(nodes)
+
+class Node:
+    def __init__(self, name:str, parent:str):
+        self.name = name
+        self.parent = parent
+        self.g = 0 # jarak ke node start
+        self.h = 0 # jarak heuristic ke node tujuan
+        self.f = 0 # Total jarak
+    # Compare nodes
+    def __eq__(self, other):
+        return self.name == other.name
+    # Sort nodes
+    def __lt__(self, other):
+         return self.f < other.f
+    # Print node
+    def __repr__(self):
+        return ('({0},{1})'.format(self.name, self.f))
+
+def add_to_open(open, neighbor):
+    for node in open:
+        if (neighbor == node and neighbor.f > node.f):
+            return False
+    return True
+
+def astar_search(graph, heuristics, start, end):
+    open = []
+    closed = []
+    start_node = Node(simpulasal, None)
+    goal_node = Node(simpultujuan, None)
+    open.append(start_node)
+    #print("start:", start_node)
+    
+    while len(open) > 0:
+        # Sort secara bobot ascending
+        open.sort()
+        current_node = open.pop(0)
+        closed.append(current_node)
+        #print("current node:", current_node)
+        
+        if current_node == goal_node:
+            path = []
+            while current_node != start_node:
+                path.append(current_node.name + ': ' + str(current_node.g))
+                current_node = current_node.parent
+            path.append(start_node.name + ': ' + str(start_node.g))
+            # Return path
+            return path[::-1]
+        neighbors = graf.get(current_node.name)
+        #print("neighbors :", neighbors)
+        for key, value in neighbors.items():
+            neighbor = Node(key, current_node)
+            if(neighbor in closed):
+                continue
+            # hitung total bobot
+            neighbor.g = current_node.g + graph.get(current_node.name, neighbor.name)
+            neighbor.h = heuristics.get(neighbor.name)
+            neighbor.f = neighbor.g + neighbor.h
+            if(add_to_open(open, neighbor) == True):
+                open.append(neighbor)
+    return None
 
 #Algoritma Utama
-#namafile = input("Masukkan file graf : " )
-namafile = 0
-readfile(namafile)
+namafilegraf = input("Masukkan file graf : " )
+readfile(namafilegraf)
 
 ceksimpul()
-#print(simpul)
+print("simpul:", simpul)
 
 isimatriks()
-#print(hasil)
+print("hasil:",hasil)
 
 grafindict()
-#print(grafberbobot)
+print("grafberbobot:", grafberbobot)
 
 grafberbobotberpasangan()
-#print(g)
+print("g:",g)
 
 read()
-#print(hasilposisi)
-
-#hasilposisi1 = [[5, 3], [14, 7], [10, 3], [5, 12], [0, 3], [1, 9], [7, 1], [17, 10]]
-#print(hasilposisi1[0][0], hasilposisi1[0][1])
+print("hasilposisi:", hasilposisi)
 
 simpulasal = input("Masukkan simpul asal : ")
 simpultujuan = input("Masukkan simpul tujuan : ")
 jarak(simpultujuan)
-#print("Ini heuristic : \n", heuristic)
+#print("heuristic:", heuristic)
+
+graf = Graph()
+for edge in g :
+    graf.connect(edge[0], edge[1], edge[2])
+
+path = astar_search(graf, heuristic, simpulasal, simpultujuan)
+print("solution:", path)
+print()
