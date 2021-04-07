@@ -6,11 +6,11 @@ def readfile(namafilegraf):
     #file = open("./test/"+ namafile + ".txt", "r")
     file = open("../test/"+ namafilegraf + ".txt", "r")
     banyaksimpul = int(file.readline())
-    print("Banyak Simpul : ", banyaksimpul)
+    #print("Banyak Simpul : ", banyaksimpul)
     grafsimpul = file.readline()
     graf = file.readlines()
-    print("grafsimpul:", grafsimpul)
-    print("graf:", graf)
+    #print("grafsimpul:", grafsimpul)
+    #print("graf:", graf)
 
 def read():
     global posisi, hasilposisi
@@ -34,8 +34,8 @@ def read():
                 b += posisi[i][j]
                 isi = [b]
                 #print("ISI : ", isi)
-    print("posisi:", posisi)
-    print("hasilposisi:", hasilposisi)
+    #print("posisi:", posisi)
+    #print("hasilposisi:", hasilposisi)
 
 def ceksimpul():
     global simpul
@@ -46,7 +46,7 @@ def ceksimpul():
     lastnode = simpul[-1][:-1]
     simpul = simpul[:-1]
     simpul.append(lastnode)
-    print("simpul:", simpul)
+    #print("simpul:", simpul)
     #splitsimpul()
 
 def splitsimpul():
@@ -217,10 +217,10 @@ namafilegraf = input("Masukkan file graf : " )
 readfile(namafilegraf)
 
 ceksimpul()
-print("simpul:", simpul)
+#print("simpul:", simpul)
 
 isimatriks()
-print("hasil:",hasil)
+#print("hasil:",hasil)
 
 grafindict()
 print("grafberbobot:", grafberbobot)
