@@ -3,7 +3,7 @@ from math import radians, cos, sin, asin, sqrt
 
 def readfile(namafilegraf):
     global graf, grafsimpul, banyaksimpul, bobot
-    file = open("./test/"+ namafilegraf + ".txt", "r")
+    file = open("../test/"+ namafilegraf + ".txt", "r")
     banyaksimpul = int(file.readline())
     #print("Banyak Simpul : ", banyaksimpul)
     grafsimpul = file.readline()
@@ -13,7 +13,7 @@ def readfile(namafilegraf):
 
 def readposisi(namafileposisi):
     global posisi, hasilposisi
-    file = open("./test/" + namafileposisi + ".txt", "r")
+    file = open("../test/" + namafileposisi + ".txt", "r")
     posisi = file.readlines()
 
     b = ''
@@ -21,18 +21,9 @@ def readposisi(namafileposisi):
     hasilposisi = []
     posisipersimpul = []
     for i in range(banyaksimpul):
-        for j in range(len(posisi[i])):
-            if (posisi[i][j] == ','):
-                posisipersimpul += isi
-                b = ''
-                #print("posisipersimpul : ", posisipersimpul)
-            elif (posisi[i][j] == '\n'):
-                hasilposisi += [posisipersimpul]
-                posisipersimpul = []
-            elif (posisi[i][j] != ','):
-                b += posisi[i][j]
-                isi = [b]
-                #print("ISI : ", isi)
+        currposisi = posisi[i].split(',')
+        currposisi = currposisi[:-1]
+        hasilposisi.append(currposisi)
     #print("posisi:", posisi)
     #print("hasilposisi:", hasilposisi)
 
@@ -60,19 +51,10 @@ def isimatriks():
     hasil = []
     bobotpersimpul = []
     for i in range(banyaksimpul):
-        for j in range(len(graf[i])):
-            if (graf[i][j] == ','):
-                bobotpersimpul += isi
-                b = ''
-                #print("BOBOTPERSIMPUL : ", bobotpersimpul)
-            elif (graf[i][j] == '\n'):
-                hasil += [bobotpersimpul]
-                bobotpersimpul = []
-            elif (graf[i][j] != ','):
-                b += graf[i][j]
-                isi = [b]
-                #print("ISI : ", isi)    
-
+        currhasil = graf[i].split(',')
+        currhasil[-1] = currhasil[-1].strip('\n')
+        hasil.append(currhasil)
+    
 def grafindict():
     global grafberbobot
     grafberbobot = []
@@ -90,7 +72,7 @@ def grafberbobotberpasangan():
         for j in range(0+i, banyaksimpul):
             if (hasil[i][j] != '-1' and hasil[j][i] != '-1'):
                 if (hasil[i][j] == hasil[j][i]):
-                    g += [(simpul[i], simpul[j], int(hasil[i][j]))]
+                    g += [(simpul[i], simpul[j], float(hasil[i][j]))]
                 else:
                     continue
             else:
@@ -120,7 +102,7 @@ def jarak(simpultujuan):
             break
 
     for i in range(banyaksimpul):
-        dist = haversine(int(hasilposisi[i][0]), int(hasilposisi[i][1]), int(hasilposisi[posisitujuan][0]), int(hasilposisi[posisitujuan][1]))
+        dist = haversine(float(hasilposisi[i][0]), float(hasilposisi[i][1]), float(hasilposisi[posisitujuan][0]), float(hasilposisi[posisitujuan][1]))
         akhir += [(simpul[i], dist)]
         
     heuristic = dict(akhir) 
@@ -250,4 +232,4 @@ for solution in pathweighted:
     currpath = solution.partition(":")
     #print(currpath)
     path.append(currpath[0])
-print(path)
+#print(path)
