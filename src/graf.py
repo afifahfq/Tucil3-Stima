@@ -70,7 +70,7 @@ def grafberbobotberpasangan():
     g = []
     for i in range(banyaksimpul):
         for j in range(0+i, banyaksimpul):
-            if (hasil[i][j] != '-1' and hasil[j][i] != '-1'):
+            if (hasil[j][i] != '-1'):
                 if (hasil[i][j] == hasil[j][i]):
                     g += [(simpul[i], simpul[j], float(hasil[i][j]))]
                 else:
