@@ -3,7 +3,7 @@ from math import radians, cos, sin, asin, sqrt
 
 def readfile(namafilegraf):
     global graf, grafsimpul, banyaksimpul, bobot
-    file = open("../test/"+ namafilegraf + ".txt", "r")
+    file = open("./test/"+ namafilegraf + ".txt", "r")
     banyaksimpul = int(file.readline())
     #print("Banyak Simpul : ", banyaksimpul)
     grafsimpul = file.readline()
@@ -13,7 +13,7 @@ def readfile(namafilegraf):
 
 def readposisi(namafileposisi):
     global posisi, hasilposisi
-    file = open("../test/" + namafileposisi + ".txt", "r")
+    file = open("./test/" + namafileposisi + ".txt", "r")
     posisi = file.readlines()
 
     b = ''
@@ -250,4 +250,4 @@ for solution in pathweighted:
     currpath = solution.partition(":")
     #print(currpath)
     path.append(currpath[0])
-#print(path)
+print(path)
