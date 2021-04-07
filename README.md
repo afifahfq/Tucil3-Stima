@@ -21,7 +21,7 @@
         <td>Awwala Nisa Kamila</td>
         <td>13519208</td>
 	<td>1. Program untuk baca file testcase<br/>
-	2. Buat laporan
+	2. Buat laporan<br/>
     3. Visualisasi graf </td>
     </tr>
 </table>

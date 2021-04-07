@@ -190,13 +190,13 @@ def astar_search(graph, heuristics, start, end):
         #print("current node:", current_node)
         
         if current_node == goal_node:
-            path = []
+            pathweighted = []
             while current_node != start_node:
-                path.append(current_node.name + ': ' + str(current_node.g))
+                pathweighted.append(current_node.name + ': ' + str(current_node.g))
                 current_node = current_node.parent
-            path.append(start_node.name + ': ' + str(start_node.g))
+            pathweighted.append(start_node.name + ': ' + str(start_node.g))
             # Return path
-            return path[::-1]
+            return pathweighted[::-1]
         neighbors = graf.get(current_node.name)
         #print("neighbors :", neighbors)
         for key, value in neighbors.items():
@@ -241,6 +241,13 @@ graf = Graph()
 for edge in g :
     graf.connect(edge[0], edge[1], edge[2])
 
-path = astar_search(graf, heuristic, simpulasal, simpultujuan)
-print("solusi:", path)
+pathweighted = astar_search(graf, heuristic, simpulasal, simpultujuan)
+print("solusi:", pathweighted)
 print()
+
+path = []
+for solution in pathweighted:
+    currpath = solution.partition(":")
+    #print(currpath)
+    path.append(currpath[0])
+#print(path)
